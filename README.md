@@ -1,4 +1,7 @@
 # Food-Delivery
+## 🛒 Customer Behavior
+<img width="1001" height="557" alt="image" src="https://github.com/user-attachments/assets/8d870da1-9d60-4e36-acb8-9fbcb39c0290" />
+
 ## 📊 Customer Segmentation (RFM Analysis)
 
 We applied RFM (Recency, Frequency, Monetary) analysis to segment our customer base and understand purchasing behaviors. The results show a highly healthy customer pipeline.

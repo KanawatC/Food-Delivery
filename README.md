@@ -15,7 +15,7 @@ We applied RFM (Recency, Frequency, Monetary) analysis to segment our customer b
 * **High-Value Champions:** Our VIPs have exceptionally high 'Monetary' scores. Retaining these 1,996 users through exclusive loyalty programs is critical, as they drive a disproportionately large share of total revenue.
 * **Low Churn Risk:** Only 267 users are classified as 'At Risk', suggesting that the current retention strategies are working effectively.
 
-* ## 🏆 Top Performing Restaurants
+## 🏆 Top Performing Restaurants
 
 An analysis of vendor performance reveals a significant concentration of revenue among a few key players. 
 
@@ -33,7 +33,7 @@ An analysis of vendor performance reveals a significant concentration of revenue
 * **High Platform Dependency:** The platform's revenue is heavily reliant on the top 2 vendors. This presents a business risk if these vendors were to churn.
 * **Actionable Strategy:** The business development team should focus on diversifying platform offerings and running targeted campaigns to boost mid-tier restaurants (like Tandoori Junction and Dilli Burger Adda) to balance the revenue distribution.
 
-* ## 📈 Promotion Strategy & Impact
+## 📈 Promotion Strategy & Impact
 
 To evaluate the effectiveness of the platform's discount strategy, we compared orders with and without promotional codes.
 

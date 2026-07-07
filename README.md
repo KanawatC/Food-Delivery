@@ -4,19 +4,18 @@
 
 ## 📊 Customer Segmentation (RFM Analysis)
 
-We applied RFM (Recency, Frequency, Monetary) analysis to segment our customer base and understand purchasing behaviors. The results show a highly healthy customer pipeline.
+We applied RFM (Recency, Frequency, Monetary) analysis to segment our customer base and understand purchasing behaviors.
 
 **Customer Distribution by Segment:**
-* Potential Loyalist: 3,406 users
-* Loyal Customers: 3,325 users
-* Need Attention: 2,613 users
-* VIP / Champions: 1,996 users
-* At Risk: 267 users
+* Need Attention: 4,427 users
+* Potential Loyalist: 3,473 users
+* Loyal Customers: 2,606 users
+* VIP / Champions: 1,098 users
+* At Risk: 3 users
 
 **Key Insights:**
-* **Healthy Customer Pipeline:** The majority of users fall into the 'Potential Loyalist' and 'Loyal Customers' segments. This indicates strong product-market fit and high customer satisfaction.
-* **High-Value Champions:** Our VIPs have exceptionally high 'Monetary' scores. Retaining these 1,996 users through exclusive loyalty programs is critical, as they drive a disproportionately large share of total revenue.
-* **Low Churn Risk:** Only 267 users are classified as 'At Risk', suggesting that the current retention strategies are working effectively.
+* **High-Value Champions:** Our 1,098 VIP/Champions have exceptionally high 'Monetary' scores and drive a disproportionately large share of total revenue. Retaining them through exclusive loyalty programs remains critical.
+* **The real churn problem is first-order stall, not lapsed VIPs:** True 'At Risk' (customers who ordered repeatedly and have since gone quiet) is only 3 users — the platform doesn't have a lapsed-repeat-customer problem. Instead, 66% of all customers (7,713 of 11,607) have placed exactly one order, ever, and ~4,835 of them have gone well past their natural reorder window without a second order (~₹3.25M in stalled first-order GMV). See the "First-Order Reactivation" section in `Food_Delivery.ipynb` for the targeting program built to address this.
 
 ## 🏆 Top Performing Restaurants
 

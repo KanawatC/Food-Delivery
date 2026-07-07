@@ -15,7 +15,38 @@ We applied RFM (Recency, Frequency, Monetary) analysis to segment our customer b
 
 **Key Insights:**
 * **High-Value Champions:** Our 1,098 VIP/Champions have exceptionally high 'Monetary' scores and drive a disproportionately large share of total revenue. Retaining them through exclusive loyalty programs remains critical.
-* **The real churn problem is first-order stall, not lapsed VIPs:** True 'At Risk' (customers who ordered repeatedly and have since gone quiet) is only 3 users — the platform doesn't have a lapsed-repeat-customer problem. Instead, 66% of all customers (7,713 of 11,607) have placed exactly one order, ever, and ~4,835 of them have gone well past their natural reorder window without a second order (~₹3.25M in stalled first-order GMV). See the "First-Order Reactivation" section in `Food_Delivery.ipynb` for the targeting program built to address this.
+* **The real churn problem is first-order stall, not lapsed VIPs:** True 'At Risk' (customers who ordered repeatedly and have since gone quiet) is only 3 users — the platform doesn't have a lapsed-repeat-customer problem. Instead, 66% of all customers (7,713 of 11,607) have placed exactly one order, ever, and ~4,835 of them have gone well past their natural reorder window without a second order (~3.25M in stalled first-order GMV). See the "First-Order Reactivation" section below for the problem breakdown and the targeting program built to address it.
+
+## 🎯 First-Order Reactivation: Problem, Solution & Results
+
+### Problem
+
+While validating the RFM segmentation, we found the original 'At Risk' segment (267 users) was a scoring artifact, not a real signal — a frequency-scoring bug was mislabeling one-time buyers as lapsed repeat customers. Fixing it (see RFM section above) exposed the platform's actual churn problem:
+
+* **66% of all customers (7,713 of 11,607) have placed exactly one order, ever.**
+* After excluding customers who simply haven't had enough time yet to reorder (first order less than 60 days before the end of the data window), **4,835 customers are genuinely stalled after a single order — representing 3,254,932.38 in first-order GMV that never repeated.**
+* Among the 3,894 customers who *did* reorder, the gap to their 2nd order has a median of 17 days and a 75th percentile of 41 days — most organic reordering happens within about six weeks, after which it drops off sharply.
+
+### Solution
+
+We built a data-driven **"First-Order Reactivation Trigger"** (implemented in `Food_Delivery.ipynb`):
+
+1. **Trigger rule:** flag a first-time customer for a reactivation nudge if no 2nd order has landed within **30 days** (between the observed median of 17 days and the 75th percentile of 41 days).
+2. **Value-tiered offer:** split eligible customers into value terciles (Low / Mid / High by first-order value) and offer 20% off, capped at 75 / 140 / 250 per tier respectively — directionally supported by the platform's own proven promo elasticity (discounts already drive +57% order volume / +47% revenue platform-wide — see Promotion Strategy section below).
+3. **Break-even check:** for each tier, state the reorder rate required for the campaign to pay for its own cost, and compare it against the platform's already-observed baseline reorder rate — a plausibility check, not an assumed conversion rate.
+4. **Deliverable:** an exported, ranked target list (`reactivation_target_list.csv`) that an outreach/marketing team can act on directly, highest-value stalled customers first.
+
+### Results (from running the notebook)
+
+| Value Tier | Customers | Avg. First Order | Total Campaign Cost | Required Reorder Rate to Break Even |
+| :--- | :--- | :--- | :--- | :--- |
+| Low | 1,633 | 310.82 | 97,438.02 | ~19.2% |
+| Mid | 1,597 | 588.67 | 187,954.08 | ~20.0% |
+| High | 1,605 | 1,126.02 | 320,468.42 | ~17.7% |
+
+* **All three tiers require only ~18–20% of stalled customers to reorder once to break even** — comfortably below the platform's already-observed baseline reorder rate of **33.5%**, suggesting the campaign is plausible rather than speculative.
+* Total addressable opportunity: **4,835 target customers**, **3,254,932.38** in stalled first-order GMV, **605,860.52** total campaign cost across all tiers if every eligible customer is reached.
+* Full ranked list exported to [`reactivation_target_list.csv`](reactivation_target_list.csv) (Customer ID, first order date/value, days since first order, value tier, recommended offer).
 
 ## 🏆 Top Performing Restaurants
 
